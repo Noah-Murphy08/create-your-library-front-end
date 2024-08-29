@@ -37,6 +37,12 @@ const App = () => {
     navigate('/libraries')
   }
 
+  const handleUpdateLibrary = async (libraryId, libraryFormData) => {
+    const updatedLibrary = await libraryService.update(libraryId, libraryFormData)
+    setLibraries(libraries.map((library) => (libraryId === library._id ? updatedLibrary : library)))
+    navigate(`/libraries/${libraryId}`)
+  }
+
   const handleDeleteLibrary = async (libraryId) => {
     const deleteLibrary = await libraryService.deleteLibrary(libraryId)
     setLibraries(libraries.filter((library) => library._id !== deleteLibrary._id))
@@ -79,6 +85,7 @@ const App = () => {
               <Route path='/libraries' element={<LibraryList libraries={libraries} />} />
               <Route path='/libraries/:libraryId' element={<LibraryDetails books={books} handleDeleteLibrary={handleDeleteLibrary} />} />
               <Route path='/libraries/new' element={<LibraryForm books={books} handleAddLibrary={handleAddLibrary} />} />
+              <Route path='/libraries/:libraryId/edit' element={<LibraryForm handleUpdateLibrary={handleUpdateLibrary} books={books} />} />
             </>
           ) : (
             <Route path="/" element={<Landing />} />

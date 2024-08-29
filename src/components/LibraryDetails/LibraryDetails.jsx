@@ -42,7 +42,10 @@ const LibraryDetails = (props) => {
                     <p>owned by {library.owner.username}</p>
                 </header>
                 {library.owner._id === user._id && (
-                    <button onClick={() => props.handleDeleteLibrary(libraryId)}>Delete Library</button>
+                    <>
+                        <Link to={`/libraries/${libraryId}/edit`}>Edit Library</Link>
+                        <button onClick={() => props.handleDeleteLibrary(libraryId)}>Delete Library</button>
+                    </>
                 )}
                 <section>
                     <h2>Books:</h2>

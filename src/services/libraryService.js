@@ -59,11 +59,27 @@ const deleteLibrary = async (libraryId) => {
     }
 }
 
+const update = async (libraryId, libraryFormData) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${libraryId}`, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(libraryFormData)
+        })
+        return res.json()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 export {
     index,
     show,
     create,
     deleteLibrary,
-    
+    update,
 }

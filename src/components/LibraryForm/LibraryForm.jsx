@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
+import * as libraryService from '../../services/libraryService'
 
 
 
@@ -8,6 +10,16 @@ const LibraryForm = (props) => {
         location: '',
         books: []
     })
+
+    const { libraryId } = useParams()
+
+    useEffect(() => {
+        const fetchLibrary = async () => {
+            const libraryData = await libraryService.show(libraryId)
+            setFormData(libraryData)
+        }
+        if (libraryId) fetchLibrary()
+    }, [libraryId])
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value })
@@ -25,13 +37,18 @@ const LibraryForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.handleAddLibrary(formData)
+        if (libraryId) {
+            props.handleUpdateLibrary(libraryId, formData)
+        } else {
+            props.handleAddLibrary(formData)
+        }
     }
 
     return (
         <>
             <main>
                 <form onSubmit={handleSubmit}>
+                    <h1>{libraryId ? 'Edit Library' : 'New Library'}</h1>
                     <label htmlFor="name-input">Name</label>
                     <input
                         required
