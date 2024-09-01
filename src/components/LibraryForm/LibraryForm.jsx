@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import * as libraryService from '../../services/libraryService'
+import styles from './LibraryForm.module.css'
 
 
 
@@ -46,43 +47,49 @@ const LibraryForm = (props) => {
 
     return (
         <>
-            <main>
-                <form onSubmit={handleSubmit}>
-                    <h1>{libraryId ? 'Edit Library' : 'New Library'}</h1>
-                    <label htmlFor="name-input">Name</label>
-                    <input
-                        required
-                        type="text"
-                        name="name"
-                        id="name-input"
-                        value={formData.name}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="location-input">Location</label>
-                    <input
-                        required
-                        type="text"
-                        name="location"
-                        id="location-input"
-                        value={formData.location}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="books-input">Books</label>
-                    <select
-                        name="books"
-                        id="books-input"
-                        value={formData.books}
-                        onChange={handleBooksChange}
-                        multiple
-                    >
-                        {props.books.map((book) => (
-                            <option key={book._id} value={book._id}>
-                                {book.title}
-                            </option>
-                        ))}
-                    </select>
+            <main className={styles.authContainer}>
+                <h1 className={styles.title}>{libraryId ? 'Edit Library' : 'New Library'}</h1>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    <div className={styles.formGrp}>
+                        <label htmlFor="name-input">Name</label>
+                        <input
+                            required
+                            type="text"
+                            name="name"
+                            id="name-input"
+                            value={formData.name}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.formGrp}>
+                        <label htmlFor="location-input">Location</label>
+                        <input
+                            required
+                            type="text"
+                            name="location"
+                            id="location-input"
+                            value={formData.location}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className={styles.formGrp}>
+                        <label htmlFor="books-input">Books</label>
+                        <select
+                            name="books"
+                            id="books-input"
+                            value={formData.books}
+                            onChange={handleBooksChange}
+                            multiple
+                        >
+                            {props.books.map((book) => (
+                                <option key={book._id} value={book._id}>
+                                    {book.title}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-                    <button type="submit">Submit</button>
+                    <button type="submit" className={styles.btn}>Submit</button>
                 </form>
             </main>
         </>

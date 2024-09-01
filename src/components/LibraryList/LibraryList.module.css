@@ -1,0 +1,42 @@
+.libListCont {
+    display: flex;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: bisque;
+}
+
+.libList {
+    width: 50vw;
+    padding: 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.libListLink {
+    text-decoration: none;
+    color: black;
+}
+
+.libName {
+    margin-bottom: 20px;
+}
+
+.imgCont {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.libListImg {
+    max-width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}

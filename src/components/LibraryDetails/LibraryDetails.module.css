@@ -1,0 +1,82 @@
+.libDetCont {
+    display: flex;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: bisque;
+}
+
+.libDet {
+    width: 50vw;
+    padding: 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.libDetLink {
+    text-decoration: none;
+    color: black;
+}
+
+.btns {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.libDetDel, .libDetLinkEdit {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+.libDetDel {
+    background-color: red;
+}
+
+.libDetLinkEdit {
+    color: black;
+}
+
+.libHead {
+    margin-bottom: 18px;
+}
+
+.imgCont {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.libDetImg {
+    max-width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.genreSec {
+    margin-bottom: 15px;
+}
+
+.genreHead {
+    margin-bottom: 15px;
+}
+
+.libDetBooks {
+    list-style-type: none;
+    padding: 0;
+}
+
+.libDetBookItem {
+    margin-bottom: 8px;
+}
