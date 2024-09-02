@@ -1,0 +1,51 @@
+.bookListCont {
+    display: flex;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: bisque;
+}
+
+.bookList {
+    width: 50vw;
+    padding: 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.bookListLink {
+    text-decoration: none;
+    color: black;
+}
+
+.bookListItem {
+    margin-bottom: 18px;
+    list-style-type: none;
+}
+
+.imgCont {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.bookListImg {
+    max-width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.genres {
+    margin-bottom: 15px;
+}
+
+.genreName {
+    margin-bottom: 15px;
+}

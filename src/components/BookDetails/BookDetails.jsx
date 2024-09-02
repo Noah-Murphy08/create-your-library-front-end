@@ -3,6 +3,9 @@ import { useState, useEffect, useContext } from "react"
 import * as bookService from '../../services/bookService'
 import CommentForm from "../CommentForm/CommentForm"
 import { AuthedUserContext } from "../../App"
+import styles from './BookDetails.module.css'
+
+const bookDetails = new URL('../images/BookDetails.jpg', import.meta.url)
 
 
 const BookDetails = (props) => {
@@ -11,7 +14,7 @@ const BookDetails = (props) => {
     const [dislikeCount, setDislikeCount] = useState(0)
     const [clickedBtn, setClickedBtn] = useState('none')
 
-    const user  = useContext(AuthedUserContext)
+    const user = useContext(AuthedUserContext)
     const { bookId } = useParams()
 
     useEffect(() => {
@@ -21,7 +24,7 @@ const BookDetails = (props) => {
             setLikeCount(bookData.like.length)
             setDislikeCount(bookData.dislike.length)
 
-            if(bookData.like.includes(user._id)) {
+            if (bookData.like.includes(user._id)) {
                 setClickedBtn('like')
             } else if (bookData.like.includes(user._id)) {
                 setClickedBtn('dislike')
@@ -37,7 +40,8 @@ const BookDetails = (props) => {
 
     const handleDeleteComment = async (commentId) => {
         const deletedComment = await bookService.deleteComment(bookId, commentId)
-        setBook({ ...book,
+        setBook({
+            ...book,
             comments: book.comments.filter((comment) => comment._id !== commentId)
         })
     }
@@ -77,51 +81,58 @@ const BookDetails = (props) => {
     if (!book) return <main>Looking for Ohara Survivors...</main>
     return (
         <>
-            <main>
-                <header>
-                    <h1>{book.title}</h1>
-                    <h2>{book.genre}</h2>
-                    <p>Written by: {book.author}</p>
-                </header>
-                <section>
-                    <button
-                        className={`feelButton ${clickedBtn === 'like' ? 'like-clicked' : ''}`}
-                        onClick={() => handleClick('like')}
-                    >
-                        Like {likeCount}
-                    </button>
-                    <button
-                        className={`feelButton ${clickedBtn === 'dislike' ? 'dislike-clicked' : ''}`}
-                        onClick={() => handleClick('dislike')}
-                    >
-                        Dislike {dislikeCount}
-                    </button>
-                </section>
-                <section>
-                    <h2>Reviews</h2>
-                    <CommentForm handleAddComment={handleAddComment} />
-                    {!book.comments.length && <p>There are no comments.</p>}
+            <div className={styles.bookDetCont}>
+                <main className={styles.bookDet}>
+                    <header className={styles.bookDetHead}>
+                        <h1>{book.title}</h1>
+                        <h2>{book.genre}</h2>
+                        <p>Written by: {book.author}</p>
+                    </header>
+                    <section className={styles.bookFeelBtns}>
+                        <button
+                            className={`feelButton ${clickedBtn === 'like' ? 'like-clicked' : ''}`}
+                            onClick={() => handleClick('like')}
+                        >
+                            Like {likeCount}
+                        </button>
+                        <button
+                            className={`feelButton ${clickedBtn === 'dislike' ? 'dislike-clicked' : ''}`}
+                            onClick={() => handleClick('dislike')}
+                        >
+                            Dislike {dislikeCount}
+                        </button>
+                    </section>
+                    <section className={styles.bookReviews}>
+                        <h2>Reviews</h2>
+                        <div className="add-comment-form">
+                            <CommentForm handleAddComment={handleAddComment} />
+                        </div>
+                        {!book.comments.length && <p>There are no comments.</p>}
 
-                    {book.comments.map((comment) => (
-                        <article key={comment._id}>
-                            <header>
-                                <p>
-                                    {comment.owner.username}'s post
-                                </p>
-                                {comment.owner._id === user._id && (
-                                    <>
-                                        <Link to={`/books/${bookId}/comments/${comment._id}/edit`}>Edit Review</Link>
-                                        <button onClick={() => handleDeleteComment(comment._id)}>
-                                            Delete Review
-                                        </button>
-                                    </>
-                                )}
-                            </header>
-                            <p>{comment.text}</p>
-                        </article>
-                    ))}
-                </section>
-            </main>
+                        {book.comments.map((comment) => (
+                            <article key={comment._id}>
+                                <header className={styles.reviewHeader}>
+                                    <p>
+                                        {comment.owner.username}'s post
+                                    </p>
+                                    {comment.owner._id === user._id && (
+                                        <>
+                                            <Link to={`/books/${bookId}/comments/${comment._id}/edit`}>Edit Review</Link>
+                                            <button onClick={() => handleDeleteComment(comment._id)}>
+                                                Delete Review
+                                            </button>
+                                        </>
+                                    )}
+                                </header>
+                                <p>{comment.text}</p>
+                            </article>
+                        ))}
+                    </section>
+                </main>
+                <div className={styles.imgCont}>
+                    <img src={bookDetails} alt="Open book" className={styles.bookDetImg} />
+                </div>
+            </div>
         </>
     )
 }

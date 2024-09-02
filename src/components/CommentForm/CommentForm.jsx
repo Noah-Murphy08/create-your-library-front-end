@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import * as bookService from '../../services/bookService'
+import styles from './CommentForm.module.css'
 
 
 const CommentForm = (props) => {
@@ -33,19 +34,40 @@ const CommentForm = (props) => {
         setFormData({ text: '' })
     }
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="text-input">Your review:</label>
-            <textarea
-                required
-                name="text"
-                id="text-input"
-                value={formData.text}
-                onChange={handleChange}
-            />
+    if (bookId && commentId) return (
+        <main className={styles.editCommentFormCont}>
+            <form onSubmit={handleSubmit} className={styles.editCommentForm}>
+                <label htmlFor="text-input" className={styles.editFormLabel}>Your review:</label>
+                <textarea
+                    required
+                    name="text"
+                    id="text-input"
+                    value={formData.text}
+                    onChange={handleChange}
+                    className={styles.editCommentTxtarea}
+                />
 
-            <button type='submit'>Submit</button>
-        </form>
+                <button type='submit' className={styles.editCommentSubmitBtn}>Submit</button>
+            </form>
+        </main>
+    )
+
+    return (
+        <div className={styles.commentFormCont}>
+            <form onSubmit={handleSubmit} className={styles.commentForm}>
+                <label htmlFor="text-input" className={styles.formLabel}>Your review:</label>
+                <textarea
+                    required
+                    name="text"
+                    id="text-input"
+                    value={formData.text}
+                    onChange={handleChange}
+                    className={styles.commentTxtarea}
+                />
+
+                <button type='submit' className={styles.commentSubmitBtn}>Submit</button>
+            </form>
+        </div>
     )
 }
 
