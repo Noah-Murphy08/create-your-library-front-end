@@ -27,6 +27,7 @@ const CommentForm = (props) => {
         event.preventDefault()
         if (bookId && commentId) {
             bookService.updateComment(bookId, commentId, formData)
+            props.setRefresh(true)
             navigate(`/books/${bookId}`)
         } else {
             props.handleAddComment(formData)

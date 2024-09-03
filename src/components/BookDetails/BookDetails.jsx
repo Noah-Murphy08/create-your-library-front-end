@@ -13,9 +13,10 @@ const BookDetails = (props) => {
     const [likeCount, setLikeCount] = useState(0)
     const [dislikeCount, setDislikeCount] = useState(0)
     const [clickedBtn, setClickedBtn] = useState('none')
+    const [refresh, setRefresh] = useState(false)
 
     const user = useContext(AuthedUserContext)
-    const { bookId } = useParams()
+    const { bookId, commentId } = useParams()
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -31,7 +32,7 @@ const BookDetails = (props) => {
             }
         }
         fetchBook()
-    }, [bookId, user._id])
+    }, [bookId, user._id, refresh])
 
     const handleAddComment = async (commentFormData) => {
         const newComment = await bookService.createComment(bookId, commentFormData)
@@ -105,7 +106,7 @@ const BookDetails = (props) => {
                     <section className={styles.bookReviews}>
                         <h2>Reviews</h2>
                         <div className="add-comment-form">
-                            <CommentForm handleAddComment={handleAddComment} />
+                            <CommentForm handleAddComment={handleAddComment} setRefresh={setRefresh} />
                         </div>
                         {!book.comments.length && <p>There are no comments.</p>}
 
