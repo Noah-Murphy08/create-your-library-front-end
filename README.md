@@ -6,7 +6,7 @@
 
 # Create Your Library
 **Created by Noah Murphy**
-## [CLICK TO OPEN](https://mlb-dream-team-e78ac4dad257.herokuapp.com)
+## [CLICK TO OPEN](https://librarycreation.netlify.app/)
 
 </div>
 
