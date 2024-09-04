@@ -30,6 +30,7 @@ const BookDetails = (props) => {
             } else if (bookData.like.includes(user._id)) {
                 setClickedBtn('dislike')
             }
+            setRefresh(false)
         }
         fetchBook()
     }, [bookId, user._id, refresh])
