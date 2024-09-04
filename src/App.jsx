@@ -81,7 +81,7 @@ const App = () => {
               <Route path="/books" element= {<BookList books={books} />} />
               <Route path="/books/:bookId" element={<BookDetails />} />
               <Route path="/books/new" element={<BookForm handleAddBook={handleAddBook} />} />
-              <Route path='/books/:bookId/comments/:commentId/edit' element={<CommentForm handleUpdateComment={handleUpdateComment} />} />
+              <Route path='/books/:bookId/comments/:commentId/edit' element={<CommentForm />} />
               <Route path='/libraries' element={<LibraryList libraries={libraries} />} />
               <Route path='/libraries/:libraryId' element={<LibraryDetails books={books} handleDeleteLibrary={handleDeleteLibrary} />} />
               <Route path='/libraries/new' element={<LibraryForm books={books} handleAddLibrary={handleAddLibrary} />} />
