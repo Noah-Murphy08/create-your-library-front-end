@@ -31,7 +31,7 @@ const BookDetails = (props) => {
             }
         }
         fetchBook()
-    }, [bookId, user._id, refresh])
+    }, [bookId, user._id])
 
     const handleAddComment = async (commentFormData) => {
         const newComment = await bookService.createComment(bookId, commentFormData)
