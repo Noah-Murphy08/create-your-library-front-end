@@ -105,7 +105,7 @@ const BookDetails = (props) => {
                     <section className={styles.bookReviews}>
                         <h2>Reviews</h2>
                         <div className="add-comment-form">
-                            <CommentForm handleAddComment={handleAddComment} handleUpdateComment={handleUpdateComment} />
+                            <CommentForm handleAddComment={handleAddComment} />
                         </div>
                         {!book.comments.length && <p>There are no comments.</p>}
 
