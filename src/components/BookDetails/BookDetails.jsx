@@ -13,7 +13,6 @@ const BookDetails = (props) => {
     const [likeCount, setLikeCount] = useState(0)
     const [dislikeCount, setDislikeCount] = useState(0)
     const [clickedBtn, setClickedBtn] = useState('none')
-    const [refresh, setRefresh] = useState(false)
 
     const user = useContext(AuthedUserContext)
     const { bookId, commentId } = useParams()
@@ -30,7 +29,6 @@ const BookDetails = (props) => {
             } else if (bookData.like.includes(user._id)) {
                 setClickedBtn('dislike')
             }
-            setRefresh(false)
         }
         fetchBook()
     }, [bookId, user._id, refresh])
@@ -38,6 +36,15 @@ const BookDetails = (props) => {
     const handleAddComment = async (commentFormData) => {
         const newComment = await bookService.createComment(bookId, commentFormData)
         setBook({ ...book, comments: [...book.comments, newComment] })
+    }
+
+    const handleUpdateComment = (updatedComment) => {
+        setBook({
+            ...book,
+            comments: book.comments.map((comment) =>
+                comment._id === updatedComment._id ? updatedComment : comment
+            )
+        })
     }
 
     const handleDeleteComment = async (commentId) => {
@@ -107,7 +114,7 @@ const BookDetails = (props) => {
                     <section className={styles.bookReviews}>
                         <h2>Reviews</h2>
                         <div className="add-comment-form">
-                            <CommentForm handleAddComment={handleAddComment} setRefresh={setRefresh} />
+                            <CommentForm handleAddComment={handleAddComment} handleUpdateComment={handleUpdateComment} />
                         </div>
                         {!book.comments.length && <p>There are no comments.</p>}
 
