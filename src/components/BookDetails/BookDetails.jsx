@@ -15,7 +15,7 @@ const BookDetails = (props) => {
     const [clickedBtn, setClickedBtn] = useState('none')
 
     const user = useContext(AuthedUserContext)
-    const { bookId, commentId } = useParams()
+    const { bookId } = useParams()
 
     useEffect(() => {
         const fetchBook = async () => {
@@ -36,15 +36,6 @@ const BookDetails = (props) => {
     const handleAddComment = async (commentFormData) => {
         const newComment = await bookService.createComment(bookId, commentFormData)
         setBook({ ...book, comments: [...book.comments, newComment] })
-    }
-
-    const handleUpdateComment = (updatedComment) => {
-        setBook({
-            ...book,
-            comments: book.comments.map((comment) =>
-                comment._id === updatedComment._id ? updatedComment : comment
-            )
-        })
     }
 
     const handleDeleteComment = async (commentId) => {

@@ -23,11 +23,10 @@ const CommentForm = (props) => {
         setFormData({ ...formData, [event.target.name]: event.target.value })
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         if (bookId && commentId) {
-            const updatedComment = bookService.updateComment(bookId, commentId, formData)
-            props.handleUpdateComment(updatedComment)
+            await bookService.updateComment(bookId, commentId, formData)
             navigate(`/books/${bookId}`)
         } else {
             props.handleAddComment(formData)
